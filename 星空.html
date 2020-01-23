@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>你要开心鸭！</title>
+
+
+
+<style type="text/css">
+
+*{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: #141212;
+    }
+    .wrapper{
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 60px;
+        left: 80%;
+        animation: rise 6s linear;
+        z-index: 500;
+    }
+    /* 月亮升起动画 */
+    @keyframes rise{
+        0%{
+            top: 350px;
+            left: 0%;
+        }
+        10%{
+            top: 300px;
+            left: 10%;
+        }
+        40%{
+            top: 160px;
+            left: 40%;
+        }
+        45%{
+            top: 140px;
+            left: 45%;
+        }
+        80%{
+            top: 60px;
+            left: 80%;
+        }
+    }
+    .moon{
+        width: 150px;
+        height: 150px;
+        background-color: rgb(247, 229, 229);
+        border-radius: 50%;
+        box-shadow: 0 0 30px #fff;
+        animation: glow 5s linear;
+    }
+    /* 设置月亮光晕从升起到空中的变化 */
+    @keyframes glow{
+        0%{
+            box-shadow: 0 0 5px #fff;
+        }
+        100%{
+            box-shadow: 0 0 30px #fff;
+        }
+    }
+    span{
+        color: #fff;
+        position: absolute;
+        transition: all 3s linear;
+        animation: spangled 3s linear infinite;
+    }
+    /* 设置星星闪烁的动画 */
+    @keyframes spangled{
+        0%{
+            opacity: 0.4;
+        }
+        100%{
+            opacity: 1;
+            text-shadow: 0 0 8px rgb(250, 250, 219);
+        }
+    }
+    /* 定义一个流星 */
+    .meteor{
+        display: block;
+        width: 10px;
+        position: relative;
+        left: 60%;
+        top: 20px;
+        opacity: 0;
+        animation: meteor 1.5s linear;
+        animation-delay: 10s;
+    }
+    /* 设置出流星的尾巴 */
+    .meteor::after{
+        content: ' ';
+        display: block;
+        border: 1px solid rgb(255,251,240);
+        border-width:  0px 100px 2px 150px;
+        transform: rotate(-45deg);
+		border-color:transparent transparent transparent #eee;
+    }
+    /* 流星动画 */
+    @keyframes meteor{
+        0%{
+            opacity: 0;
+            transform: scale(0.5) translate3d(0,0)
+        }
+        50%{
+            opacity: 0.9;
+			transform: translate3d(-200px, 200px, 0);
+
+        }
+        100%{
+            opacity: 0;
+            transform: scale(1.5) translate3d(-300px,300px,0);
+        }
+    }
+
+</style>
+
+
+<script>
+        window.onload = function(){
+        //获取屏幕宽高
+        var screenWidth = document.documentElement.clientWidth;
+        var screenHeight = document.documentElement.clientHeight;
+        for(var i = 0; i < 200; i++){
+            //随机获得在屏幕中的位置
+            var x = parseInt(Math.random()*screenWidth);
+            var y = parseInt(Math.random()*screenHeight);
+            //创建文本
+            var span = document.createElement('span');
+            document.body.appendChild(span);
+            //插入星星 我的星星是文本 也可以插入图片
+            span.innerHTML = '★';
+            span.style.left = x + 'px';
+            span.style.top = y + 'px';
+            //生成随机的延迟时间
+            var ran = Math.random()*1.5;
+            span.style.animationDelay = ran + 's';
+            //生成随机大小的星星
+            span.style.fontSize = Math.random()*16 + 'px'; 
+        }
+       }
+
+    </script>
+
+
+
+</head>
+
+<body>
+
+<div style="display:none";class="music">
+	<audio controls="controls" autoplay="autoplay" loop=-1>
+ 	<source src="music\星星.mp3" type="audio/mpeg" />
+	</audio>
+	</div>
+
+
+<div class="wrapper">
+        <div class="moon"></div>
+    </div>
+    <span>★</span>
+    <div class="meteor"></div>
+
+</body>
+</html>
